@@ -110,7 +110,7 @@ function ExecuteData(TagName,Value)
 					let data_save = {	
 						alarm_id : docs[0].id,
 							name : TagName,
-							data : new Date,
+							timestamp: new Date,
 							machine: 1,
 							value : Value	
 						}
