@@ -53,9 +53,19 @@ var historySchema = new mongoose.Schema({
 });
 
 var History = mongoose.model('History', historySchema, 'history');
-//console.log(Alarm)
-//var TagName = "MAIN_01_VAR_ga_m_alarmhardfaultword{2}";
-//var Value  =1;
+//
+//table history product
+var productSchema = new mongoose.Schema({
+	alarm_id: String,
+	value: Number,
+	timestamp: Date,
+	machine: Number,
+	note: String,
+	name : String
+
+});
+
+var Product = mongoose.model('Product', productSchema, 'product');
 console.log("helllo");
 
 //function execute alarm
@@ -90,8 +100,38 @@ function ExecuteData(TagName,Value)
 			{
 				// production execute 
 				
+				var messageproduct ;
+				messageproduct = '{'+'"TagName":'+TagName+','+'"Value":'+ Value + '}'; 
 					
-				//	socket.emit('Product',Value);
+					socket.emit('Product',messageproduct);
+					//insert db 
+					var insertData = [];
+						//
+					let data_save = {	
+						alarm_id : docs[0].id,
+							name : TagName,
+							data : new Date,
+							machine: 1,
+							value : Value	
+						}
+					insertData.push(data_save);
+					var arr = insertData;
+					Product.insertMany(arr, 
+						function(err, docs)
+						 {
+							if (err)
+							{
+								console.log('Err: Insert data has error !!!');
+							}	
+							else 
+							{
+								console.log('insert new alarm success!!');
+								console.log(arr);
+							}
+						});
+
+
+
 				
 			}
 		}
@@ -265,7 +305,7 @@ function updatealarm(tagname,alarmbit)
 	History.findOne({name:tagname,bit:alarmbit,complete:0},function(err,doc)
 	{
 		doc.stop = new Date;
-		doc.complete = 1;
+		doc.competeplete = 1;
 		doc.save();
 
 		
