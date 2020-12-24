@@ -13,7 +13,7 @@
     "async": "^2.6.3",
     "aws-iot-device-sdk": "^2.2.1",
     "bitwise": "^2.0.4",
-    "date-and-time": "^0.10.0",
+    "date-and-time": "^0.14.2",
     "messaging-api-line": "^0.8.3",
     "mongodb": "^3.3.3",
     "mongoose": "^5.7.7",
