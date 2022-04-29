@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@line/bot-sdk": "^6.8.2",
-    "async": "^2.6.3",
+    "async": "^2.6.4",
     "aws-iot-device-sdk": "^2.2.1",
     "bitwise": "^2.0.4",
     "date-and-time": "^0.10.0",
